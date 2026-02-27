@@ -1,170 +1,191 @@
-# Travel Planner - Trip Packages
+🌍 Travel Planner – RESTful CRUD Web Application
 
-A simple PHP/MySQL application for managing trip packages. Similar to MakeMyTrip's holiday packages section.
+A full-stack Travel Planner web application built using PHP, MySQL, HTML, CSS, and Vanilla JavaScript.
 
----
+The system allows users to manage trip packages through a clean card-based interface with complete CRUD functionality.
 
-## P.S. - Student Assignment
+🚀 Project Overview
 
-### What is this application?
-Travel Planner is a web application where users can browse, search, and manage trip packages. It consists of:
-- **Frontend**: HTML/CSS/JS interface with a card grid layout
-- **Backend**: PHP API for CRUD operations (Create, Read, Delete)
-- **Database**: MySQL to store trip packages
+This application allows users to:
 
-### Your Tasks
+✅ View trip packages
 
-As part of the hackathon, you need to implement the following mandatory tasks:
+✅ Add new trips
 
-1. **Build the Frontend UI** (`index.html`)
-   - Create a responsive card grid layout to display trip packages
-   - Add a search bar to filter packages by destination/title
-   - Implement a modal popup to view package details when clicking a card
-   - Add a form modal to create new trip packages
-   - Style it with CSS (gradients, shadows, responsive design)
+✅ Edit existing trips
 
-2. **Implement DELETE API** (`api.php`)
-   - The TODO comment in `api.php` guides you on what to implement
-   - Add a DELETE endpoint to remove trip packages by ID
-   - Handle proper validation and error responses
+✅ Delete trips
 
-3. **Sky’s the Limit – Create your own features** (Optional)
-   - Add any additional features you want to implement
-   - Use your creativity to make the application better
+✅ Filter by destination
 
-### What you're given:
-- `schema.sql` - Database structure (run this first)
-- `seed.sql` - Sample data with 5 trip packages
-- `config.php` - Database connection settings
-- `api.php` - Partial API with GET (list, search, get by ID) and POST (create) already implemented, plus a TODO for DELETE
+✅ Sort by price and rating
 
----
+The frontend communicates with a custom-built REST API using the Fetch API and JSON.
 
-## Prerequisites
+🏗️ Tech Stack
+🎨 Frontend
 
-- XAMPP installed (Apache + MySQL)
+HTML5
 
----
+CSS3
 
-## Step 1: Start XAMPP
+JavaScript (Vanilla JS)
 
-### Linux
+Fetch API
 
-```bash
-cd /opt/lampp
-sudo ./lampp start
-```
+Async/Await
 
-### Windows
+⚙️ Backend
 
-1. Open **XAMPP Control Panel**
-2. Click **Start** button next to **Apache**
-3. Click **Start** button next to **MySQL**
+PHP (Custom RESTful API)
 
----
+MySQL
 
-## Step 2: Create the Database
+Prepared Statements
 
-1. Open browser and go to: **http://localhost/phpmyadmin**
+📡 API Architecture
 
-2. Click the **SQL** tab
+This project implements a RESTful API using different HTTP methods:
 
-3. Copy and paste the contents of `schema.sql` to create the database and table
+Method	Operation	Description
+GET	Read	Fetch trip packages
+POST	Create	Add new trip
+PUT	Update	Edit existing trip
+DELETE	Delete	Remove trip
+🔄 Important Update (PUT Method Enhancement)
 
-4. Click **Go** button
+Initially, the backend API supported:
 
-5. Click **SQL** tab again
+GET
 
-6. Copy and paste the contents of `seed.sql` to add sample trip packages
+POST
 
-7. Click **Go** button
+DELETE
 
----
+However, it did not support the PUT method, which is required for updating records in a RESTful system.
 
-## Step 3: Run the Application
+Enhancements Made:
 
-Open a terminal in the `travel-planner` directory:
+Added a PUT handler in api.php
 
-```bash
-cd travel-planner
+Read raw request data using:
+
+file_get_contents("php://input");
+
+Implemented database update using a prepared UPDATE statement
+
+Configured CORS headers to allow PUT requests
+
+Added OPTIONS preflight handling for browser compatibility
+
+This enhancement made the system fully REST-compliant and enabled true update functionality.
+
+📂 Project Structure
+travel-planner-rest-api/
+│
+├── index.php        # Frontend UI + JavaScript logic
+├── api.php          # REST API backend
+├── config.php       # Database connection
+├── schema.sql       # Database schema
+├── seed.sql         # Sample data
+└── README.md
+🗄️ Database Setup
+1️⃣ Create Database
+CREATE DATABASE travel_planner;
+USE travel_planner;
+2️⃣ Create Table
+CREATE TABLE trip_packages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    destination VARCHAR(255) NOT NULL,
+    duration_days INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    rating DECIMAL(3,1) DEFAULT 0,
+    highlights TEXT,
+    image_url TEXT
+);
+🔁 Application Flow
+
+User interacts with the UI
+
+JavaScript sends HTTP request using fetch()
+
+api.php processes the request
+
+MySQL database performs the operation
+
+JSON response is returned
+
+Frontend dynamically updates the interface
+
+🔐 Security Features
+
+✅ Prepared statements (Prevents SQL Injection)
+
+✅ Input sanitization using htmlspecialchars()
+
+✅ CORS configuration
+
+✅ ID validation before update/delete
+
+✅ Structured error handling
+
+▶️ How To Run
+🖥️ Using XAMPP
+
+Place project folder inside htdocs
+
+Start Apache and MySQL
+
+Visit:
+
+http://localhost/travel-planner-rest-api/index.php
+💻 Using PHP Built-in Server
+
+Run:
+
 php -S localhost:8000
-```
 
----
+Then visit:
 
-## Step 4: Open in Browser
+http://localhost:8000/index.php
+📚 Key Concepts Implemented
 
-Visit: **http://localhost:8000**
+REST API Design
 
-You should see the Travel Planner (once you've built the frontend) with sample trip packages!
+CRUD Operations
 
----
+HTTP Methods
 
-## API Endpoints (For Reference)
+JSON Data Exchange
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `api.php?action=list` | Get all packages |
-| GET | `api.php?action=get&id=1` | Get single package |
-| GET | `api.php?action=search&q=kerala` | Search packages |
-| POST | `api.php` | Create new package |
-| DELETE | `api.php` | Delete package (TODO: Implement this!) |
+Async/Await
 
-### POST Request Body Format:
-```json
-{
-    "title": "Kerala Backwaters Bliss",
-    "destination": "Kerala",
-    "duration_days": 5,
-    "price": 24999,
-    "image_url": "https://example.com/image.jpg",
-    "highlights": ["Houseboat Stay", "Alleppey Backwaters", "Sunset Cruise"]
-}
-```
+DOM Manipulation
 
-### DELETE Request Body Format (to be implemented):
-```json
-{
-    "id": 5
-}
-```
+Backend-Frontend Communication
 
----
+Idempotent Methods (PUT)
 
-## Files in this Directory
+CORS Handling
 
-| File | Purpose |
-|------|---------|
-| `schema.sql` | Creates database and trip_packages table |
-| `seed.sql` | Inserts 5 sample trip packages |
-| `config.php` | Database connection settings |
-| `api.php` | API endpoints (partial - GET and POST done, DELETE TODO) |
-| `index.html` | Frontend interface (to be built by you) |
+🎯 Learning Outcomes
 
----
+Through this project, the following were achieved:
 
-## Troubleshooting
+Built a full-stack web application
 
-| Problem | Solution |
-|---------|----------|
-| "Database connection failed" | Make sure MySQL is running in XAMPP Control Panel |
-| "Access denied for user" | Check `config.php` - default XAMPP is username: `root`, password: empty |
-| Port 8000 already in use | Use a different port: `php -S localhost:8080` |
+Implemented a RESTful API in PHP
 
----
+Integrated MySQL database
 
-## Tips for Implementation
+Added PUT method for proper update functionality
 
-### Frontend Tips:
-- Use CSS Grid for the card layout (`grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))`)
-- Use `fetch()` API to call the PHP backend
-- For modals, use a fixed overlay with `display: none/block` or a CSS class toggle
-- Remember to prevent event bubbling when clicking inside modals
+Designed dynamic UI rendering without page reload
 
-### DELETE API Tips:
-- Check `$method === 'DELETE'` to handle DELETE requests
-- Use `json_decode(file_get_contents('php://input'), true)` to read the request body
-- Use prepared statements (`$conn->prepare()`) for security
-- Check `$stmt->affected_rows` to confirm deletion
+Applied secure database practices
 
-Good luck!
+👩‍💻 Developed By
+
+Neha Mhatre
+Full Stack Developer (In Progress 🚀)
