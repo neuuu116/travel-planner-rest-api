@@ -1,52 +1,34 @@
 🌍 Travel Planner – RESTful CRUD Web Application
 
 A full-stack Travel Planner web application built using PHP, MySQL, HTML, CSS, and Vanilla JavaScript.
-
 The system allows users to manage trip packages through a clean card-based interface with complete CRUD functionality.
 
 🚀 Project Overview
-
 This application allows users to:
-
 ✅ View trip packages
-
 ✅ Add new trips
-
 ✅ Edit existing trips
-
 ✅ Delete trips
-
 ✅ Filter by destination
-
 ✅ Sort by price and rating
 
 The frontend communicates with a custom-built REST API using the Fetch API and JSON.
-
 🏗️ Tech Stack
 🎨 Frontend
-
 HTML5
-
 CSS3
-
 JavaScript (Vanilla JS)
-
 Fetch API
-
 Async/Await
 
 ⚙️ Backend
-
 PHP (Custom RESTful API)
-
 MySQL
-
 Prepared Statements
 
 📡 API Architecture
 
 This project implements a RESTful API using different HTTP methods:
-
 Method	Operation	Description
 GET	Read	Fetch trip packages
 POST	Create	Add new trip
@@ -55,31 +37,20 @@ DELETE	Delete	Remove trip
 🔄 Important Update (PUT Method Enhancement)
 
 Initially, the backend API supported:
-
 GET
-
 POST
-
 DELETE
-
 However, it did not support the PUT method, which is required for updating records in a RESTful system.
 
 Enhancements Made:
-
 Added a PUT handler in api.php
-
 Read raw request data using:
-
 file_get_contents("php://input");
-
 Implemented database update using a prepared UPDATE statement
-
 Configured CORS headers to allow PUT requests
-
 Added OPTIONS preflight handling for browser compatibility
 
 This enhancement made the system fully REST-compliant and enabled true update functionality.
-
 📂 Project Structure
 travel-planner-rest-api/
 │
@@ -162,30 +133,20 @@ JSON Data Exchange
 Async/Await
 
 DOM Manipulation
-
 Backend-Frontend Communication
 
 Idempotent Methods (PUT)
-
 CORS Handling
 
 🎯 Learning Outcomes
-
-Through this project, the following were achieved:
-
-Built a full-stack web application
-
+• Through this project, the following were achieved:
+• Built a full-stack web application
 Implemented a RESTful API in PHP
-
 Integrated MySQL database
-
 Added PUT method for proper update functionality
-
 Designed dynamic UI rendering without page reload
-
 Applied secure database practices
 
 👩‍💻 Developed By
-
-Neha Mhatre
+team spark
 Full Stack Developer (In Progress 🚀)
