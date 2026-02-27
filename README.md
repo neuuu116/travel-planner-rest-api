@@ -6,10 +6,15 @@ The system allows users to manage trip packages through a clean card-based inter
 🚀 Project Overview
 This application allows users to:
 ✅ View trip packages
+
 ✅ Add new trips
+
 ✅ Edit existing trips
+
 ✅ Delete trips
+
 ✅ Filter by destination
+
 ✅ Sort by price and rating
 
 The frontend communicates with a custom-built REST API using the Fetch API and JSON.
